@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | CyberShield Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/register.css">
+</head>
+<body>
+    <div class="pixel-grid"></div>
+    
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-inner">C</div>
+            </div>
+            <div class="logo-text">CYBERSHIELD ACADEMY</div>
+        </div>
+        
+        <nav>
+            <a href="../../index.html" class="nav-btn">Главная</a>
+            <a href="../modules.html" class="nav-btn">Модули</a>
+            <a href="../practical/labs.html" class="nav-btn">Лаборатории</a>
+            <a href="../community/community.html" class="nav-btn">Сообщество</a>
+            <a href="register.html" class="nav-btn login-btn active">Регистрация</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1 class="glitch" data-text="СТАНЬ ЗАЩИТНИКОМ СЕТИ">СТАНЬ ЗАЩИТНИКОМ СЕТИ</h1>
+            <p>Присоединяйся к элите кибербезопасности. Начни свой путь к профессионализму сегодня.</p>
+        </section>
+
+        <!-- Registration Container -->
+        <div class="registration-container">
+            <!-- Registration Form -->
+            <div class="registration-form">
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="username">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
+                        <input type="text" id="username" class="form-input" placeholder="Введите имя пользователя" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">ЭЛЕКТРОННАЯ ПОЧТА</label>
+                        <input type="email" id="email" class="form-input" placeholder="yourname@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">ПАРОЛЬ</label>
+                        <input type="password" id="password" class="form-input" placeholder="Минимум 8 символов" required>
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="password-requirements">
+                            <div class="requirement-item" id="req-length">
+                                <i class="fas fa-circle"></i>
+                                <span>Минимум 8 символов</span>
+                            </div>
+                            <div class="requirement-item" id="req-uppercase">
+                                <i class="fas fa-circle"></i>
+                                <span>Заглавная буква (A-Z)</span>
+                            </div>
+                            <div class="requirement-item" id="req-lowercase">
+                                <i class="fas fa-circle"></i>
+                                <span>Строчная буква (a-z)</span>
+                            </div>
+                            <div class="requirement-item" id="req-number">
+                                <i class="fas fa-circle"></i>
+                                <span>Цифра (0-9)</span>
+                            </div>
+                            <div class="requirement-item" id="req-special">
+                                <i class="fas fa-circle"></i>
+                                <span>Специальный символ (!@#$%^&*)</span>
+                            </div>
+                        </div>
+                        <button type="button" class="generate-password-btn" id="generatePassword">
+                            <i class="fas fa-dice"></i> Сгенерировать пароль
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">ПОДТВЕРЖДЕНИЕ ПАРОЛЯ</label>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Повторите пароль" required>
+                        <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="level">УРОВЕНЬ ПОДГОТОВКИ</label>
+                        <select id="level" class="form-input" required>
+                            <option value="">-- Выберите уровень --</option>
+                            <option value="beginner">Начинающий</option>
+                            <option value="intermediate">Средний</option>
+                            <option value="advanced">Продвинутый</option>
+                            <option value="expert">Эксперт</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">
+                                Я принимаю <a href="#" class="terms-link">Условия использования</a> и 
+                                <a href="#" class="terms-link">Политику конфиденциальности</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" checked>
+                            <label for="newsletter">
+                                Получать уведомления о новых курсах и обновлениях
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        СОЗДАТЬ АККАУНТ
+                    </button>
+
+                    <div class="success-message" id="successMessage">
+                        Регистрация успешна! Перенаправление на главную страницу...
+                    </div>
+                </form>
+            </div>
+
+            <!-- Registration Benefits -->
+            <div class="registration-benefits">
+                <h2 class="benefits-title">ПРЕИМУЩЕСТВА АКАДЕМИИ</h2>
+                
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-text">
+                            <h4>Практические лаборатории</h4>
+                            <p>Реальные сценарии атак и защиты в безопасной среде</p>
+                        </div>
+                    </li>
+                    
+                    <li class="benefit-item">
+                        <div class="benefit-icon">🎓</div>
+                        <div class="benefit-text">
+                            <h4>Сертификация</h4>
+                            <p>Официальные сертификаты по завершении каждого модуля</p>
+                        </div>
+                    </li>
+                    
+                    <li class="benefit-item">
+                        <div class="benefit-icon">👥</div>
+                        <div class="benefit-text">
+                            <h4>Сообщество экспертов</h4>
+                            <p>Общение с профессионалами кибербезопасности</p>
+                        </div>
+                    </li>
+                    
+                    <li class="benefit-item">
+                        <div class="benefit-icon">🛡️</div>
+                        <div class="benefit-text">
+                            <h4>Карьерный рост</h4>
+                            <p>Подготовка к востребованным позициям в ИБ</p>
+                        </div>
+                    </li>
+                    
+                    <li class="benefit-item">
+                        <div class="benefit-icon">📈</div>
+                        <div class="benefit-text">
+                            <h4>Обновляемый контент</h4>
+                            <p>Актуальные материалы по новым угрозам и технологиям</p>
+                        </div>
+                    </li>
+                    
+                    <li class="benefit-item">
+                        <div class="benefit-icon">🏆</div>
+                        <div class="benefit-text">
+                            <h4>Соревнования CTF</h4>
+                            <p>Регулярные турниры для оттачивания навыков</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Security Meter -->
+                <div class="security-meter">
+                    <h3 class="meter-title">УРОВЕНЬ ЗАЩИЩЕННОСТИ</h3>
+                    <div class="meter-bar">
+                        <div class="meter-fill"></div>
+                    </div>
+                    <p class="meter-text">
+                        Все данные защищены сквозным шифрованием AES-256. 
+                        Мы никогда не передаем вашу информацию третьим лицам.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="footer-text">© <span class="current-year">2025</span> CyberShield Academy. Все права защищены.</p>
+        <p class="footer-text">Образовательная платформа нового поколения</p>
+    </footer>
+    
+    <script src="../../js/main.js"></script>
+</body>
+</html>

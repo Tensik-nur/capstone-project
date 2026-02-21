@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модули | CyberShield Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <style>
+        /* Pixel Elements */
+        .pixel-border {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .pixel-border-top {
+            top: -2px;
+            left: 10px;
+            right: 10px;
+            height: 4px;
+            background: var(--module-color, var(--accent-cyan));
+            box-shadow: 0 0 10px var(--module-color, var(--accent-cyan));
+        }
+
+        .pixel-border-bottom {
+            bottom: -2px;
+            left: 10px;
+            right: 10px;
+            height: 4px;
+            background: var(--module-color, var(--accent-cyan));
+            box-shadow: 0 0 10px var(--module-color, var(--accent-cyan));
+        }
+
+        .pixel-border-left {
+            left: -2px;
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            background: var(--module-color, var(--accent-cyan));
+            box-shadow: 0 0 10px var(--module-color, var(--accent-cyan));
+        }
+
+        .pixel-border-right {
+            right: -2px;
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            background: var(--module-color, var(--accent-cyan));
+            box-shadow: 0 0 10px var(--module-color, var(--accent-cyan));
+        }
+
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--module-color, var(--accent-cyan));
+            box-shadow: 0 0 15px var(--module-color, var(--accent-cyan));
+            z-index: 3;
+        }
+
+        .corner-tl {
+            top: -2px;
+            left: -2px;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        .corner-tr {
+            top: -2px;
+            right: -2px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .corner-bl {
+            bottom: -2px;
+            left: -2px;
+            clip-path: polygon(0 100%, 0 0, 100% 100%);
+        }
+
+        .corner-br {
+            bottom: -2px;
+            right: -2px;
+            clip-path: polygon(100% 100%, 0 100%, 100% 0);
+        }
+
+        .pixel-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(var(--module-color, var(--accent-cyan)) 1px, transparent 1px),
+                linear-gradient(90deg, var(--module-color, var(--accent-cyan)) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.03;
+            animation: patternMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        .click-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--module-color, var(--accent-cyan)) 0%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Terminal Animation */
+        .terminal-animation {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--accent-cyan);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .terminal-animation:hover {
+            box-shadow: 0 0 30px var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+
+        .terminal-text {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent-neon);
+            line-height: 1.6;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: var(--accent-neon);
+            animation: blink 1s infinite;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Colors for different card types */
+        .module-card {
+            --module-color: var(--accent-cyan);
+        }
+
+        .module-card:nth-child(1) { --module-color: var(--accent-cyan); }
+        .module-card:nth-child(2) { --module-color: var(--accent-neon); }
+        .module-card:nth-child(3) { --module-color: var(--accent-purple); }
+        .module-card:nth-child(4) { --module-color: var(--accent-orange); }
+        .module-card:nth-child(5) { --module-color: var(--accent-green); }
+
+        .practice-card {
+            --module-color: var(--accent-purple);
+        }
+
+        .practice-card:nth-child(1) { --module-color: var(--accent-pink); }
+        .practice-card:nth-child(2) { --module-color: var(--accent-orange); }
+        .practice-card:nth-child(3) { --module-color: var(--accent-red); }
+
+        /* Enhanced Module Card */
+        .module-card {
+            position: relative;
+        }
+
+        .module-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(to top, rgba(0, 240, 255, 0.05), transparent);
+            transition: height 0.3s ease;
+        }
+
+        .module-card:hover::after {
+            height: 100%;
+        }
+
+        /* Staggered animation */
+        .modules-grid .module-card {
+            animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+        }
+
+        .modules-grid .module-card:nth-child(1) { animation-delay: 0.1s; }
+        .modules-grid .module-card:nth-child(2) { animation-delay: 0.2s; }
+        .modules-grid .module-card:nth-child(3) { animation-delay: 0.3s; }
+        .modules-grid .module-card:nth-child(4) { animation-delay: 0.4s; }
+        .modules-grid .module-card:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            animation: slideDown 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-grid"></div>
+    
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-inner">C</div>
+            </div>
+            <div class="logo-text">CYBERSHIELD ACADEMY</div>
+        </div>
+        
+        <nav>
+            <a href="../index.html" class="nav-btn">Главная</a>
+            <a href="modules.html" class="nav-btn active">Модули</a>
+            <a href="practical/labs.html" class="nav-btn">Лаборатории</a>
+            <a href="community/community.html" class="nav-btn">Сообщество</a>
+            <a href="auth/register.html" class="nav-btn login-btn">Регистрация</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1 class="glitch" data-text="ВЫБЕРИ СВОЙ ПУТЬ">ВЫБЕРИ СВОЙ ПУТЬ</h1>
+            <p>8+ уникальных модулей кибербезопасности. Каждый — новая ступень к мастерству.</p>
+        </section>
+
+        <!-- Terminal Animation -->
+        <div class="terminal-animation">
+            <div class="terminal-text">
+                > ИНИЦИАЛИЗАЦИЯ МОДУЛЕЙ... УСПЕШНО<br>
+                > ЗАГРУЗКА ИНТЕРФЕЙСА... ВЫПОЛНЕНО<br>
+                > СИСТЕМА ГОТОВА К ВЫБОРУ<br>
+                > НАЖМИТЕ НА МОДУЛЬ ДЛЯ АКТИВАЦИИ<span class="terminal-cursor"></span>
+            </div>
+        </div>
+        
+        <!-- Theory Section -->
+        <section class="modules-section">
+            <div class="section-header">
+                <h2 class="section-title">📚 ТЕОРЕТИЧЕСКИЕ ОСНОВЫ</h2>
+                <p class="section-subtitle">Изучите фундаментальные знания кибербезопасности</p>
+            </div>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="module-level">НАЧИНАЮЩИЙ</div>
+                    <h3>Основы безопасности</h3>
+                    <p>Фундаментальные знания о кибербезопасности, типах атак и методах защиты.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-clock"></i> 4 часа</span>
+                        <span><i class="fas fa-book"></i> 8 лекций</span>
+                    </div>
+                    <a href="education/basics.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-key"></i></div>
+                    <div class="module-level">СРЕДНИЙ</div>
+                    <h3>Криптография</h3>
+                    <p>Изучение методов шифрования, алгоритмов и криптографических протоколов.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-clock"></i> 6 часов</span>
+                        <span><i class="fas fa-book"></i> 10 лекций</span>
+                    </div>
+                    <a href="education/cryptography.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="module-level">СРЕДНИЙ</div>
+                    <h3>Сетевая безопасность</h3>
+                    <p>Защита сетей, межсетевые экраны, VPN и протоколы безопасности.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-clock"></i> 5 часов</span>
+                        <span><i class="fas fa-book"></i> 9 лекций</span>
+                    </div>
+                    <a href="education/network-security.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-user-shield"></i></div>
+                    <div class="module-level">ПРОДВИНУТЫЙ</div>
+                    <h3>Защита от угроз</h3>
+                    <p>Методы выявления и предотвращения кибер-угроз, фишинг и социальная инженерия.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-clock"></i> 7 часов</span>
+                        <span><i class="fas fa-book"></i> 12 лекций</span>
+                    </div>
+                    <a href="education/defense.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-balance-scale"></i></div>
+                    <div class="module-level">ПРОДВИНУТЫЙ</div>
+                    <h3>Законодательство и управление</h3>
+                    <p>Правовые основы кибербезопасности, стандарты ISO, GDPR и управление рисками.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-clock"></i> 6 часов</span>
+                        <span><i class="fas fa-book"></i> 11 лекций</span>
+                    </div>
+                    <a href="legal/law.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Practice Section -->
+        <section class="modules-section">
+            <div class="section-header">
+                <h2 class="section-title">⚗️ ПРАКТИЧЕСКИЕ ТРЕНИРОВКИ</h2>
+                <p class="section-subtitle">Применяйте знания в реальных сценариях</p>
+            </div>
+            
+            <div class="modules-grid">
+                <div class="module-card practice-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-microscope"></i></div>
+                    <div class="module-level">6 ЛАБОРАТОРИЙ</div>
+                    <h3>Практические лаборатории</h3>
+                    <p>Интерактивные упражнения и симуляции реальных сценариев безопасности в безопасной среде.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-tasks"></i> 6 задач</span>
+                        <span><i class="fas fa-certificate"></i> Сертификат</span>
+                    </div>
+                    <a href="practical/labs.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+                
+                <div class="module-card practice-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-virus"></i></div>
+                    <div class="module-level">ПРОДВИНУТЫЙ</div>
+                    <h3>Этичный хакинг</h3>
+                    <p>Тестирование на проникновение и поиск уязвимостей в безопасной среде. Реальные сценарии атак.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-tasks"></i> 8 задач</span>
+                        <span><i class="fas fa-certificate"></i> Сертификат</span>
+                    </div>
+                    <a href="practical/pentesting.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+                
+                <div class="module-card practice-card">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="module-level">ИГРОВОЙ РЕЖИМ</div>
+                    <h3>Кибер-Квесты</h3>
+                    <p>Интерактивные игровые сценарии для повышения навыков. CTF задачи и соревнования.</p>
+                    <div class="module-stats">
+                        <span><i class="fas fa-tasks"></i> 10 квестов</span>
+                        <span><i class="fas fa-trophy"></i> Награды</span>
+                    </div>
+                    <a href="practical/game-cyber.html" class="module-btn">
+                        <i class="fas fa-arrow-right"></i> НАЧАТЬ
+                    </a>
+                    <div class="click-effect"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p class="footer-text">© <span class="current-year">2025</span> CyberShield Academy. Все права защищены.</p>
+        <p class="footer-text">Образовательная платформа нового поколения</p>
+    </footer>
+    
+    <script src="../js/main.js"></script>
+    <script>
+        // Enhanced module interactions with pixel effects
+        function handleModuleClick(event, moduleCard) {
+            const clickEffect = moduleCard.querySelector('.click-effect');
+            const terminal = document.querySelector('.terminal-animation .terminal-text');
+            const moduleTitle = moduleCard.querySelector('h3').textContent;
+            
+            // Create click effect
+            if (clickEffect) {
+                clickEffect.style.left = '50%';
+                clickEffect.style.top = '50%';
+                clickEffect.style.transform = 'translate(-50%, -50%)';
+                clickEffect.style.opacity = '0.7';
+                
+                clickEffect.animate([
+                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 0.7 },
+                    { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 0 }
+                ], {
+                    duration: 600,
+                    easing: 'ease-out'
+                });
+            }
+            
+            // Play sound
+            playClickSound();
+            
+            // Update terminal
+            terminal.innerHTML = `
+                > АКТИВАЦИЯ МОДУЛЯ...<br>
+                > ${moduleTitle.toUpperCase()}<br>
+                > ЗАГРУЗКА СОДЕРЖАНИЯ...<br>
+                > ПЕРЕНАПРАВЛЕНИЕ<span class="terminal-cursor"></span>
+            `;
+            
+            // Trigger module navigation
+            const moduleBtn = moduleCard.querySelector('.module-btn');
+            if (moduleBtn) {
+                setTimeout(() => {
+                    window.location.href = moduleBtn.getAttribute('href');
+                }, 800);
+            }
+        }
+        
+        // Sound effect
+        function playClickSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                console.log("Audio not supported");
+            }
+        }
+        
+        // Add click handlers to module cards
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.closest('.module-btn') || e.target.closest('.module-btn') === e.target) {
+                    handleModuleClick(e, card);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
