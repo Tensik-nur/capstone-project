@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Academy | 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a0a14;
+            --secondary-dark: #121225;
+            --accent-neon: #39FF14;
+            --accent-cyan: #00F0FF;
+            --accent-purple: #9D4EDD;
+            --accent-orange: #FFA500;
+            --accent-red: #FF6B6B;
+            --accent-pink: #FF4D9E;
+            --accent-yellow: #FFD700;
+            --accent-green: #00FF7F;
+            --text-light: #F8F9FA;
+            --text-gray: #CCCCCC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                linear-gradient(to bottom, rgba(9, 2, 26, 0.9), rgba(9, 2, 26, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z' fill='%2300f0ff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* Animated scan lines */
+        .scan-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 240, 255, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: -1;
+            animation: scan 10s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        /* Header */
+        header {
+            padding: 2rem;
+            border-bottom: 3px solid var(--accent-neon);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            image-rendering: pixelated;
+        }
+
+        .logo-inner {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-neon), var(--accent-cyan));
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 2px 2px 0px var(--accent-purple);
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent-neon), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Обновленные стили для ссылок-кнопок */
+        .nav-btn {
+            background: transparent;
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::after {
+            left: 100%;
+        }
+
+        .login-btn {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: rgba(157, 78, 221, 0.8);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+        }
+
+        .nav-btn.active {
+            background: var(--accent-neon);
+            border-color: var(--accent-neon);
+            color: var(--primary-dark);
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Modules Hero Section */
+        .modules-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modules-hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-neon), var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+            animation: textGlow 3s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px rgba(57, 255, 20, 0.3); }
+            100% { text-shadow: 0 0 30px rgba(57, 255, 20, 0.6), 0 0 40px rgba(0, 240, 255, 0.4); }
+        }
+
+        .modules-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        /* Pixel Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Pixel Module Button */
+        .pixel-module {
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font-family: 'Share Tech Mono', monospace;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            text-decoration: none;
+            display: block;
+        }
+
+        .pixel-module:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .pixel-module:active {
+            transform: translateY(-5px) scale(0.98);
+        }
+
+        .pixel-module-inner {
+            position: relative;
+            padding: 3rem 2rem;
+            background: rgba(18, 18, 37, 0.9);
+            border: 3px solid;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .pixel-module:hover .pixel-module-inner {
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px var(--module-color);
+        }
+
+        /* Пиксельные границы */
+        .pixel-border {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .pixel-border-top {
+            top: -2px;
+            left: 10px;
+            right: 10px;
+            height: 4px;
+            background: var(--module-color);
+            box-shadow: 0 0 10px var(--module-color);
+        }
+
+        .pixel-border-bottom {
+            bottom: -2px;
+            left: 10px;
+            right: 10px;
+            height: 4px;
+            background: var(--module-color);
+            box-shadow: 0 0 10px var(--module-color);
+        }
+
+        .pixel-border-left {
+            left: -2px;
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            background: var(--module-color);
+            box-shadow: 0 0 10px var(--module-color);
+        }
+
+        .pixel-border-right {
+            right: -2px;
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            background: var(--module-color);
+            box-shadow: 0 0 10px var(--module-color);
+        }
+
+        /* Углы */
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--module-color);
+            box-shadow: 0 0 15px var(--module-color);
+            z-index: 3;
+        }
+
+        .corner-tl {
+            top: -2px;
+            left: -2px;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        .corner-tr {
+            top: -2px;
+            right: -2px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .corner-bl {
+            bottom: -2px;
+            left: -2px;
+            clip-path: polygon(0 100%, 0 0, 100% 100%);
+        }
+
+        .corner-br {
+            bottom: -2px;
+            right: -2px;
+            clip-path: polygon(100% 100%, 0 100%, 100% 0);
+        }
+
+        /* Контент модуля */
+        .module-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .module-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--module-color);
+            filter: drop-shadow(0 0 15px var(--module-color));
+            transition: all 0.3s ease;
+        }
+
+        .pixel-module:hover .module-icon {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 0 25px var(--module-color));
+        }
+
+        .module-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            color: var(--module-color);
+            text-shadow: 0 0 15px var(--module-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .pixel-module:hover .module-title {
+            letter-spacing: 3px;
+        }
+
+        .module-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--module-color);
+            opacity: 0.5;
+        }
+
+        /* Пиксельный паттерн на фоне */
+        .pixel-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(var(--module-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--module-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.03;
+            animation: patternMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        /* Эффект при нажатии */
+        .click-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--module-color) 0%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Цвета модулей */
+        .pixel-module[data-module="1"] { --module-color: var(--accent-cyan); }
+        .pixel-module[data-module="2"] { --module-color: var(--accent-neon); }
+        .pixel-module[data-module="3"] { --module-color: var(--accent-purple); }
+        .pixel-module[data-module="4"] { --module-color: var(--accent-orange); }
+        .pixel-module[data-module="5"] { --module-color: var(--accent-red); }
+        .pixel-module[data-module="6"] { --module-color: var(--accent-green); }
+        .pixel-module[data-module="game"] { --module-color: var(--accent-pink); }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(57, 255, 20, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-text {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .current-year {
+            color: var(--accent-neon);
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            .logo-container {
+                justify-content: center;
+            }
+            nav {
+                justify-content: center;
+            }
+            .modules-hero h1 {
+                font-size: 2.5rem;
+            }
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            .pixel-module-inner {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Terminal animation */
+        .terminal-animation {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--accent-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-text {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent-neon);
+            line-height: 1.6;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: var(--accent-neon);
+            animation: blink 1s infinite;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Game Section Styles */
+        .game-section {
+            margin-top: 5rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .game-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent-pink);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px var(--accent-pink);
+        }
+
+        .game-module {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-description {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 1.5rem auto 2rem;
+            max-width: 700px;
+        }
+
+        .game-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .game-tag {
+            background: rgba(255, 77, 158, 0.1);
+            color: var(--accent-pink);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-pink);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated scan lines -->
+    <div class="scan-lines"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-inner">C</div>
+            </div>
+            <div class="logo-text">CYBERSHIELD ACADEMY</div>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-btn">Главная</a>
+            <a href="modules.html" class="nav-btn active">Модули</a>
+            <a href="labs.html" class="nav-btn">Лаборатории</a>
+            <a href="community.html" class="nav-btn">Сообщество</a>
+            <a href="register.html" class="nav-btn login-btn">Регистрация</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Modules Hero -->
+        <section class="modules-hero">
+            <h1>ВЫБЕРИ СВОЙ ПУТЬ</h1>
+            <p>6 уникальных модулей кибербезопасности. Каждый — новая ступень к мастерству.</p>
+        </section>
+
+        <!-- Terminal Animation -->
+        <div class="terminal-animation">
+            <div class="terminal-text">
+                > ИНИЦИАЛИЗАЦИЯ МОДУЛЕЙ... УСПЕШНО<br>
+                > ЗАГРУЗКА ИНТЕРФЕЙСА... ВЫПОЛНЕНО<br>
+                > СИСТЕМА ГОТОВА К ВЫБОРУ<br>
+                > НАЖМИТЕ ДЛЯ АКТИВАЦИИ<span class="terminal-cursor"></span>
+            </div>
+        </div>
+
+        <!-- Modules Grid -->
+        <div class="modules-grid">
+            <!-- Module 1 -->
+            <a href="basics.html" class="pixel-module" data-module="1">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number">01</div>
+                        <div class="module-icon">⚡</div>
+                        <h3 class="module-title">Основы кибербезопасности</h3>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Module 2 -->
+            <a href="network-security.html" class="pixel-module" data-module="2">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number">02</div>
+                        <div class="module-icon">🌐</div>
+                        <h3 class="module-title">Сетевая безопасность</h3>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Module 3 -->
+            <a href="cryptography.html" class="pixel-module" data-module="3">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number">03</div>
+                        <div class="module-icon">🔐</div>
+                        <h3 class="module-title">Криптография</h3>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Module 4 -->
+            <a href="pentesting.html" class="pixel-module" data-module="4">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number">04</div>
+                        <div class="module-icon">🕵️</div>
+                        <h3 class="module-title">Тестирование на проникновение</h3>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Module 5 -->
+            <a href="defense.html" class="pixel-module" data-module="5">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number">05</div>
+                        <div class="module-icon">🛡️</div>
+                        <h3 class="module-title">Оборона и реагирование</h3>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Module 6 -->
+            <a href="law.html" class="pixel-module" data-module="6">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number">06</div>
+                        <div class="module-icon">⚖️</div>
+                        <h3 class="module-title">Законодательство и управление</h3>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Game Section -->
+        <section class="game-section">
+            <h2 class="game-section-title">ПРАКТИЧЕСКАЯ ИГРА</h2>
+            <p class="game-description">
+                Примените знания на практике в симуляторе киберменеджера. Управляйте бюджетом безопасности, 
+                принимайте стратегические решения и защищайте компанию от реальных кибератак.
+            </p>
+            
+            <a href="game-cyber.html" class="pixel-module game-module" data-module="game">
+                <div class="pixel-module-inner">
+                    <div class="pixel-border pixel-border-top"></div>
+                    <div class="pixel-border pixel-border-bottom"></div>
+                    <div class="pixel-border pixel-border-left"></div>
+                    <div class="pixel-border pixel-border-right"></div>
+                    
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="pixel-pattern"></div>
+                    
+                    <div class="module-content">
+                        <div class="module-number" style="left: 15px; right: auto;">GAME</div>
+                        <div class="module-icon">🎮</div>
+                        <h3 class="module-title">КИБЕРМЕНЕДЖЕР: СИМУЛЯТОР</h3>
+                        <div class="game-tags">
+                            <span class="game-tag">💰 Управление бюджетом</span>
+                            <span class="game-tag">🛡️ Триада CIA</span>
+                            <span class="game-tag">📈 Стратегические решения</span>
+                            <span class="game-tag">⚡ Реальные сценарии</span>
+                        </div>
+                        <div class="click-effect"></div>
+                    </div>
+                </div>
+            </a>
+            
+            <p style="color: var(--text-gray); margin-top: 2rem; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Игра открывается в новой вкладке. Ваш прогресс сохраняется автоматически.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© <span class="current-year">2025</span> CyberShield Academy. Все права защищены.</p>
+        <p class="footer-text">Образовательная платформа нового поколения</p>
+    </footer>
+
+    <script>
+        // Обновляем год в футере
+        document.querySelector('.current-year').textContent = new Date().getFullYear();
+        
+        // Функция для обработки клика по модулю
+        function handleModuleClick(event, moduleId) {
+            event.preventDefault();
+            const link = event.currentTarget;
+            
+            // Получаем название модуля
+            const modules = [
+                "Основы кибербезопасности",
+                "Сетевая безопасность", 
+                "Криптография",
+                "Тестирование на проникновение",
+                "Оборона и реагирование на инциденты", 
+                "Законодательство и управление",
+                "Киберменеджер: Симулятор"
+            ];
+            
+            let moduleName;
+            if (moduleId === "game") {
+                moduleName = "Киберменеджер: Симулятор";
+            } else {
+                moduleName = modules[moduleId - 1];
+            }
+            
+            // Создаем эффект нажатия
+            createClickEffect(link, moduleId);
+            
+            // Анимация активации
+            link.style.animation = 'pulse 0.5s';
+            
+            // Показываем сообщение в терминале
+            const terminal = document.querySelector('.terminal-animation .terminal-text');
+            
+            if (moduleId === "game") {
+                terminal.innerHTML = `
+                    > ЗАПУСК СИМУЛЯТОРА КИБЕРМЕНЕДЖЕРА...<br>
+                    > ЗАГРУЗКА ИГРОВОЙ СРЕДЫ...<br>
+                    > ГОТОВО! ПЕРЕХОДИМ К ИГРЕ<br>
+                    > УДАЧИ В ЗАЩИТЕ КОМПАНИИ!<span class="terminal-cursor"></span>
+                `;
+            } else {
+                terminal.innerHTML = `
+                    > ПЕРЕХОДИМ К МОДУЛЮ ${moduleId}...<br>
+                    > ${moduleName.toUpperCase()}<br>
+                    > ЗАГРУЗКА СОДЕРЖАНИЯ...<br>
+                    > ПЕРЕНАПРАВЛЕНИЕ<span class="terminal-cursor"></span>
+                `;
+            }
+            
+            // Добавляем звуковой эффект
+            playClickSound();
+            
+            // Для игры открываем в новой вкладке, для модулей - в текущей
+            setTimeout(() => {
+                if (moduleId === "game") {
+                    window.open(link.href, '_blank');
+                } else {
+                    window.location.href = link.href;
+                }
+            }, 1000);
+        }
+        
+        // Создаем эффект клика
+        function createClickEffect(element, moduleId) {
+            const effect = element.querySelector('.click-effect');
+            
+            effect.style.left = '50%';
+            effect.style.top = '50%';
+            effect.style.transform = 'translate(-50%, -50%)';
+            effect.style.opacity = '0.7';
+            
+            // Анимация эффекта
+            effect.animate([
+                { transform: 'translate(-50%, -50%) scale(0)', opacity: 0.7 },
+                { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            });
+        }
+        
+        // Воспроизведение звука клика
+        function playClickSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                // Если AudioContext не поддерживается, просто игнорируем
+                console.log("AudioContext не поддерживается");
+            }
+        }
+        
+        // Добавляем обработчики событий для всех модулей
+        document.querySelectorAll('.pixel-module').forEach(module => {
+            const moduleId = module.getAttribute('data-module');
+            module.addEventListener('click', (event) => handleModuleClick(event, moduleId));
+        });
+        
+        // Анимация появления карточек
+        const moduleCards = document.querySelectorAll('.pixel-module');
+        moduleCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+        
+        // Эффект при наведении на терминал
+        const terminal = document.querySelector('.terminal-animation');
+        terminal.addEventListener('mouseenter', () => {
+            terminal.style.boxShadow = '0 0 30px var(--accent-cyan)';
+            terminal.style.transform = 'translateY(-5px)';
+        });
+        
+        terminal.addEventListener('mouseleave', () => {
+            terminal.style.boxShadow = '';
+            terminal.style.transform = '';
+        });
+        
+        // Добавляем CSS для анимации пульса
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
